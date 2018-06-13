@@ -1,0 +1,8 @@
+node_modules/
+*.tgz
+lerna-debug.log
+npm-debug.log*
+package-lock.json
+cscope.files
+cscope.out
+.tern-project
