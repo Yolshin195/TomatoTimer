@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Timer from './Timer';
 import Settings from './Settings';
 import Navbar from './Navbar';
+import Todo from './Todo';
 
 class MainComponent extends React.Component {
   render() {
@@ -23,6 +24,7 @@ class MainComponent extends React.Component {
         <div className="row">
           {display} 
         </div>
+        <Todo/>
       </div>
     );
   }
@@ -30,7 +32,7 @@ class MainComponent extends React.Component {
 
 const putStateProps = (state) => {
   return {
-    showSetting: state.showSetting
+    showSetting: state.tomatoTimer.showSetting
   };
 }
 

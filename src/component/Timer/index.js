@@ -2,7 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { actionStartTimer, actionPauseTimer} from '../../store/actions';
+import { actionStartTimer, actionPauseTimer} from '../../store/tomatoTimer.actions';
 
 class Timer extends React.Component {
   render() {
@@ -47,14 +47,14 @@ class Timer extends React.Component {
 
 const putStateProps = (state) => {
   return {
-    minutes: state.minutes,
-    seconds: state.seconds,
-    timerWork: state.timerWork,
-    timerCounter: state.timerCounter,
-    durationWorkCount: state.durationWorkCount,
-    durationWork: state.durationWork,
-    durationSmallBreak: state.durationSmallBreak,
-    durationBigBreak: state.durationBigBreak
+    minutes: state.tomatoTimer.minutes,
+    seconds: state.tomatoTimer.seconds,
+    timerWork: state.tomatoTimer.timerWork,
+    timerCounter: state.tomatoTimer.timerCounter,
+    durationWorkCount: state.tomatoTimer.durationWorkCount,
+    durationWork: state.tomatoTimer.durationWork,
+    durationSmallBreak: state.tomatoTimer.durationSmallBreak,
+    durationBigBreak: state.tomatoTimer.durationBigBreak
   };
 }
 

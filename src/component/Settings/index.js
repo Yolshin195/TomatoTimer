@@ -30,10 +30,10 @@ class Settings extends React.Component {
 
 const putStateProps = (state) => {
   return {
-    durationWorkCount: state.durationWorkCount,
-    durationWork: state.durationWork,
-    durationSmallBreak: state.durationSmallBreak,
-    durationBigBreak: state.durationBigBreak
+    durationWorkCount: state.tomatoTimer.durationWorkCount,
+    durationWork: state.tomatoTimer.durationWork,
+    durationSmallBreak: state.tomatoTimer.durationSmallBreak,
+    durationBigBreak: state.tomatoTimer.durationBigBreak
   };
 }
 

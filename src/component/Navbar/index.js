@@ -2,7 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { actionShowSettings } from '../../store/actionSettings';
+import { actionShowSettings } from '../../store/tomatoTimer.actions';
 
 import Navbar from './Navbar';
 
@@ -30,10 +30,9 @@ class NavbatContainer extends React.Component {
 
 const putStateProps = (state) => {
   return {
-    items: state.navbarItems.split(','),
-    textLogo: state.navbarTextLogo,
-    showSetting: state.showSetting
-
+    items: state.tomatoTimer.navbarItems.split(','),
+    textLogo: state.tomatoTimer.navbarTextLogo,
+    showSetting: state.tomatoTimer.showSetting
   };
 }
 
