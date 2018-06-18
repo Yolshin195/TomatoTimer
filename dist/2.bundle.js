@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{51:function(e,t,a){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var l=u(a(1)),n=u(a(21));u(a(14));function u(e){return e&&e.__esModule?e:{default:e}}t.default=function(){return l.default.createElement("div",{className:"row"},l.default.createElement("div",{className:"col s12"},l.default.createElement(n.default,null)))}}}]);
+//# sourceMappingURL=2.bundle.js.map

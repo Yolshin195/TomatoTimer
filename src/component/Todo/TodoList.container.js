@@ -19,7 +19,7 @@ const getVisibleTodos = (todos, filter) => {
 
 const putStateToProps = (state) => {
   return {
-    todos: getVisibleTodos(state.todo.todos, state.todo.visibilityFilter)
+    todos: getVisibleTodos(state.todo.todos.todos, state.todo.visibilityFilter)
   }
 }
 

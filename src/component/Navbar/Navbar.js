@@ -1,5 +1,7 @@
 import React from 'react';
 import NavItem from './NavItem';
+import { Link } from "react-router-dom";
+
 
 export default class Navbar extends React.Component {
   render() {
@@ -11,7 +13,7 @@ export default class Navbar extends React.Component {
     return (
       <nav>
         <div className="nav-wrapper white">
-          <a href="#" className="brand-logo">{textLogo}</a>
+          <Link to="/" className="brand-logo">{textLogo}</Link>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             {navItems}
           </ul>

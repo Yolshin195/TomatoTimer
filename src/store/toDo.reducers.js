@@ -7,17 +7,24 @@ import {
   SET_ACTIVE_TODO,
   VisibilityFilters 
 } from './toDo.actions';
-const { SHOW_ALL } = VisibilityFilters
-const initState = [
-  {
-    title: 'Test task',
-    text: 'test task text',
-    completed: false,
-    lostTomato: 0,
-    completedTomato: 0
-  }
-];
+import { 
+  ACTION_NEXT_TIMER,
+  ACTION_STOP_TIMER
+} from './tomatoTimer.actions.js';
 
+const { SHOW_ALL } = VisibilityFilters
+const initState = {
+  currentTask: 0,
+  todos: [
+    {
+      title: 'Test task',
+      text: 'test task text',
+      completed: false,
+      lostTomato: 0,
+      completedTomato: 0
+    }
+  ]
+}
 function visibilityFilter(state = SHOW_ALL, action) {
   switch (action.type) {
     case SET_VISIBILITY_FILTER_TODO:
@@ -27,41 +34,77 @@ function visibilityFilter(state = SHOW_ALL, action) {
   }
 }
 
-function todos(state = initState,action) {
+function todos(state = initState, action) {
   switch (action.type) {
     case ADD_TODO:
-      return [
+      return{
         ...state,
-        {
-          title: action.title,
-          text: action.text,
-          completed: false,
-          lostTomato: 0,
-          completedTomato: 0
-        }
-      ]
-    case ADD_TOMATO_TODO:
-      return state.map((todo, index) => {
-        if (index === action.index) {
-          var obj = {};
-          if(action.tomato) {
-            obj.completedTomato = todo.completedTomato + 1; 
-          } else {
-            obj.lostTomato = todo.lostTomato + 1;
+        todos: [
+          ...state.todos,
+          {
+            title: action.title,
+            text: action.text,
+            completed: false,
+            lostTomato: 0,
+            completedTomato: 0
           }
-          return Object.assign({}, todo, obj);
-        }
-        return todo;
-      }) 
+        ]
+      }
+    case ADD_TOMATO_TODO:
+      return {
+        ...state,
+        todos: state.todos.map((todo, index) => {
+          if (index === action.index) {
+            var obj = {};
+            if(action.tomato) {
+              obj.completedTomato = todo.completedTomato + 1; 
+            } else {
+              obj.lostTomato = todo.lostTomato + 1;
+            }
+            return Object.assign({}, todo, obj);
+          }
+          return todo;
+        }) 
+      }
     case TOGGLE_TODO:
-      return state.map((todo, index) => {
-        if (index === action.index) {
-          return Object.assign({}, todo, {
-            completed: !todo.completed
-          })
-        }
-        return todo
-      })
+      return { 
+        ...state,
+        todos: state.todos.map((todo, index) => {
+          if (index === action.index) {
+            return Object.assign({}, todo, {
+              completed: !todo.completed
+            })
+          }
+          return todo
+        })
+      }
+    case ACTION_NEXT_TIMER: {
+      console.log(ACTION_NEXT_TIMER, state);
+      return {
+        ...state,
+        todos: state.todos.map((todo, index) => {
+          if (index === state.currentTask) {
+            return Object.assign({}, todo, {
+              lostTomato: todo.lostTomato + 1 
+            })
+          }
+          return todo
+        })
+      };
+    } 
+    case ACTION_STOP_TIMER: {
+      return {
+        ...state,
+        todos: state.todos.map((todo, index) => {
+          if (index === state.currentTask) {
+            return Object.assign({}, todo, {
+              completedTomato: todo.completedTomato + 1 
+            })
+          }
+          return todo
+        })
+      };
+    } 
     default:
       return state
   }

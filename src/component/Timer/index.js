@@ -2,18 +2,18 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { actionStartTimer, actionPauseTimer} from '../../store/tomatoTimer.actions';
+import { actionStartTimer, actionNextTimer, actionPauseTimer} from '../../store/tomatoTimer.actions';
 
 class Timer extends React.Component {
   render() {
     //const dispatch = this.props.dispatch;
-    const {minutes, seconds, startTimer, pauseTimer, timerWork} = this.props;
+    const {minutes, seconds, startTimer, pauseTimer, timerWork, nextTimer} = this.props;
     return (
       <div className="timer-container">
         <div className="timer-next table">
           <div
             className="table-cll"
-            onClick={() => {startTimer(this.props)}}
+            onClick={() => {nextTimer(this.props)}}
           >
             Next
           </div>
@@ -61,6 +61,7 @@ const putStateProps = (state) => {
 const putActionsToProps = (dispatch) => {
   return {
     startTimer: bindActionCreators(actionStartTimer, dispatch),
+    nextTimer: bindActionCreators(actionNextTimer, dispatch),
     pauseTimer: bindActionCreators(actionPauseTimer, dispatch),
   }
 }

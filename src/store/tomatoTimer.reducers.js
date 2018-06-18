@@ -1,6 +1,7 @@
 import { 
   ACTION_TICK_TIMER,
   ACTION_START_TIMER,
+  ACTION_NEXT_TIMER,
   ACTION_PAUSE_TIMER,
   ACTION_SHOW_SETTINGS
 } from './tomatoTimer.actions.js';
@@ -30,6 +31,12 @@ const tomatoTimerReducer = (state = initialState, action) => {
         seconds: action.payload.seconds
       }
     case ACTION_START_TIMER:
+      return {
+        ...state,
+        timerCounter: action.payload,
+        timerWork: true
+      }
+    case ACTION_NEXT_TIMER:
       return {
         ...state,
         timerCounter: action.payload,

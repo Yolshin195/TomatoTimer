@@ -26,13 +26,15 @@ Timer.prototype = {
     
   },
 
-  stop: function() {
+  stop: function(mesageFlag) {
     this.remained = this.endTime = this.startTime = null;
     
     clearInterval(this.timer);
 
     this.timer = null;
-    this.emit('stop');
+    if(!mesageFlag) {
+      this.emit('stop');
+    }
   },
 
   pause: function() {

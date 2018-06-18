@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import Timer from './lib/time';
 import MainComponent from './component/mainComponent';
 import rootReducer from './store/reducers';
-import { tickTimer, actionStartTimer } from './store/tomatoTimer.actions';
+import { tickTimer, actionStartTimer, actionStopTimer } from './store/tomatoTimer.actions';
 import startTimer from './lib/tomatoTimer'; 
 
 export const store = createStore(rootReducer);
@@ -24,6 +24,7 @@ timer.on('start', function(mesage){
 timer.on('stop', function(mesage){
   console.log('stop', mesage);
   store.dispatch(actionStartTimer(store.getState().tomatoTimer));
+  store.dispatch(actionStopTimer());
 });
 
 timer.on('pause', function(mesage){
