@@ -1,13 +1,16 @@
 import React from 'react';
 import Todo from './Todo';
 
-const TodoList = ({ todos, onTodoClick }) => (
+const TodoList = ({currentTask, todos, onRemoveTodo, onTodoClick, onSetCurrentTask }) => (
   <ul className="collapsible">
-    {todos.map(todo =>
+    {todos.map((todo, index) =>
       <Todo
-        key={todo.id}
+        key={index}
+        currentTask={(currentTask === index) ? true : false}
         {...todo}
-        onClick={() => onTodoClick(todo.id)}
+        onCompleted={() => onTodoClick(index)}
+        onSetCurrentTask={()=>onSetCurrentTask(index)}  
+        onRemove={()=>onRemoveTodo(index)}
       />
     )}
   </ul>

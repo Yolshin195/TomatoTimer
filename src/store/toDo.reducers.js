@@ -4,8 +4,10 @@ import {
   ADD_TOMATO_TODO,
   TOGGLE_TODO,
   SET_VISIBILITY_FILTER_TODO,
-  SET_ACTIVE_TODO,
+  SET_CURRENT_TODO,
+  REMOVE_TODO,
   VisibilityFilters 
+  
 } from './toDo.actions';
 import { 
   ACTION_NEXT_TIMER,
@@ -17,7 +19,21 @@ const initState = {
   currentTask: 0,
   todos: [
     {
-      title: 'Test task',
+      title: 'finalize the task list',
+      text: 'force the "task completion" button to work',
+      completed: true,
+      lostTomato: 0,
+      completedTomato: 0
+    },
+    {
+      title: 'Test task1',
+      text: 'test task text',
+      completed: false,
+      lostTomato: 0,
+      completedTomato: 0
+    },
+    {
+      title: 'Test task2',
       text: 'test task text',
       completed: false,
       lostTomato: 0,
@@ -54,7 +70,7 @@ function todos(state = initState, action) {
       return {
         ...state,
         todos: state.todos.map((todo, index) => {
-          if (index === action.index) {
+          if (index === action.index && !todo.completed) {
             var obj = {};
             if(action.tomato) {
               obj.completedTomato = todo.completedTomato + 1; 
@@ -65,6 +81,13 @@ function todos(state = initState, action) {
           }
           return todo;
         }) 
+      }
+    case REMOVE_TODO:
+      return {
+        ...state,
+        todos: state.todos.filter((todo, index) => 
+          index !== action.index
+        ) 
       }
     case TOGGLE_TODO:
       return { 
@@ -78,12 +101,17 @@ function todos(state = initState, action) {
           return todo
         })
       }
+    case SET_CURRENT_TODO:
+      return {
+        ...state,
+        currentTask: action.index
+      }
     case ACTION_NEXT_TIMER: {
       console.log(ACTION_NEXT_TIMER, state);
       return {
         ...state,
         todos: state.todos.map((todo, index) => {
-          if (index === state.currentTask) {
+          if (index === state.currentTask && !todo.completed) {
             return Object.assign({}, todo, {
               lostTomato: todo.lostTomato + 1 
             })
@@ -96,7 +124,7 @@ function todos(state = initState, action) {
       return {
         ...state,
         todos: state.todos.map((todo, index) => {
-          if (index === state.currentTask) {
+          if (index === state.currentTask && !todo.completed) {
             return Object.assign({}, todo, {
               completedTomato: todo.completedTomato + 1 
             })

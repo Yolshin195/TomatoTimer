@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { toggleTodo } from '../../store/toDo.actions'
+import { toggleTodo, setCurrentTodo, removeTodo} from '../../store/toDo.actions'
 
 import TodoList from './TodoList';
 
@@ -18,16 +18,18 @@ const getVisibleTodos = (todos, filter) => {
 }
 
 const putStateToProps = (state) => {
+  console.log(state);
   return {
-    todos: getVisibleTodos(state.todo.todos.todos, state.todo.visibilityFilter)
+    todos: getVisibleTodos(state.todo.todos.todos, state.todo.visibilityFilter),
+    currentTask: state.todo.todos.currentTask
   }
 }
 
 const putActionsToProps = (dispatch) => {
   return {
-    onTodoClick: (id) => {
-      dispatch(toggleTodo(id))
-    }
+    onTodoClick: bindActionCreators(toggleTodo, dispatch),
+    onSetCurrentTask: bindActionCreators(setCurrentTodo, dispatch),
+    onRemoveTodo: bindActionCreators(removeTodo, dispatch)
   }
 }
 

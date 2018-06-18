@@ -1,3 +1,46 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?4xpiot');
+  src:  url('fonts/icomoon.eot?4xpiot#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?4xpiot') format('truetype'),
+    url('fonts/icomoon.woff?4xpiot') format('woff'),
+    url('fonts/icomoon.svg?4xpiot#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-currentTask:before {
+  content: "\e903";
+}
+.icon-delete:before {
+  content: "\e902";
+}
+.icon-minus:before {
+  content: "\e901";
+}
+.icon-tomato:before {
+  content: "\e900";
+}
+.icon-delete:hover {
+  color: red;
+}
+
+
 /*materialize start*/
 nav .brand-logo {
   color: black;
@@ -10,7 +53,34 @@ nav {
   margin-bottom: 20px;
 }
 
+.material-icons__white {
+  color: black !important;
+}
+
+.modal__open {
+  z-index: 1003;
+  display: block;
+  opacity: 1;
+  top: 10%;
+  transform: scaleX(1) scaleY(1);
+}
+
+.modal-overlay__open {
+  z-index: 1002;
+  display: block;
+  opacity: 0.5;
+}
 /*materialize end*/
+
+.todo-completed_btn:hover {
+  color: green;
+}
+
+.todo-add__position {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
 
 .timer-container {
   height: 40vw;
@@ -51,6 +121,7 @@ nav {
   background-position: center;
   background-repeat: no-repeat;
 }
+
 .timer-puse__image {
   max-width: 256px;
   max-height: 256px;
