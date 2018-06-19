@@ -7,10 +7,13 @@ import Timer from './lib/time';
 import MainComponent from './component/mainComponent';
 import rootReducer from './store/reducers';
 import { tickTimer, actionStartTimer, actionStopTimer } from './store/tomatoTimer.actions';
-import startTimer from './lib/tomatoTimer'; 
+import startTimer from './lib/tomatoTimer';
+import { trackStorForLocalStore, getStateOfLocalStore } from './lib/stateForLocalStore';
 
-export const store = createStore(rootReducer);
+export const store = createStore( rootReducer,
+  getStateOfLocalStore() );
 
+trackStorForLocalStore(store);
 
 export const timer = new Timer();
 

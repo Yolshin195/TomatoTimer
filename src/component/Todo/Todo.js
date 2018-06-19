@@ -13,6 +13,7 @@ const Todo = ({currentTask, title, text, completed, completedTomato, lostTomato,
         :
           <p
             style={{margin:0}}
+            className="todo-currentTask__active"
             onClick={onSetCurrentTask}
           >
             {title}
