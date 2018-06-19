@@ -50,21 +50,39 @@ function visibilityFilter(state = SHOW_ALL, action) {
   }
 }
 
+function isCurrentTask(currentTask, todos) {
+  if (!todos[currentTask] || todos[currentTask].completed) {
+    for (let i = 0; i < todos.length; i++) {
+      if ( todos[i].completed === false) {
+        return i; 
+      }
+    }
+  }
+
+  return currentTask
+}
+
 function todos(state = initState, action) {
+  let currentTask = state.currentTask;
+  let todos = [];
+
   switch (action.type) {
     case ADD_TODO:
+      todos = [
+        ...state.todos,
+        {
+          title: action.title,
+          text: action.text,
+          completed: false,
+          lostTomato: 0,
+          completedTomato: 0
+        }
+      ];
+      currentTask = isCurrentTask(currentTask, todos);
       return{
         ...state,
-        todos: [
-          ...state.todos,
-          {
-            title: action.title,
-            text: action.text,
-            completed: false,
-            lostTomato: 0,
-            completedTomato: 0
-          }
-        ]
+        todos,
+        currentTask
       }
     case ADD_TOMATO_TODO:
       return {
@@ -83,23 +101,30 @@ function todos(state = initState, action) {
         }) 
       }
     case REMOVE_TODO:
-      return {
-        ...state,
-        todos: state.todos.filter((todo, index) => 
+        todos = state.todos.filter((todo, index) => 
           index !== action.index
         ) 
+        currentTask = isCurrentTask(currentTask, todos); 
+      return {
+        ...state,
+        todos,
+        currentTask
       }
     case TOGGLE_TODO:
+      todos = state.todos.map((todo, index) => {
+        if (index === action.index) {
+          return Object.assign({}, todo, {
+            completed: !todo.completed
+          })
+        }
+        return todo
+      });
+      currentTask = isCurrentTask(currentTask, todos);
+
       return { 
         ...state,
-        todos: state.todos.map((todo, index) => {
-          if (index === action.index) {
-            return Object.assign({}, todo, {
-              completed: !todo.completed
-            })
-          }
-          return todo
-        })
+        todos: todos, 
+        currentTask
       }
     case SET_CURRENT_TODO:
       return {
@@ -134,7 +159,11 @@ function todos(state = initState, action) {
       };
     } 
     default:
-      return state
+      currentTask = isCurrentTask(currentTask, state.todos);
+      return {
+        ...state,
+        currentTask
+      } 
   }
 }
 

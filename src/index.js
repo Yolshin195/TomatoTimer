@@ -11,6 +11,7 @@ import startTimer from './lib/tomatoTimer';
 
 export const store = createStore(rootReducer);
 
+
 export const timer = new Timer();
 
 timer.on('tick', function(mesage){

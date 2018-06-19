@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import Navbar from '../Navbar';
 
@@ -19,6 +19,10 @@ const Todo = Loadable({
   loader: () => import('./routes/Todo'),
   loading: Loading,
 });
+
+//const Home = import('./routes/Home');
+//const Settings = import('./routes/Settings');
+//const Todo = import('./routes/Todo');
 
 const App = () => (
   <Router>

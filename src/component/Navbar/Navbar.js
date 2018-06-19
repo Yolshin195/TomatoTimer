@@ -5,9 +5,13 @@ import { Link } from "react-router-dom";
 
 export default class Navbar extends React.Component {
   render() {
-    const { items, onClick, textLogo} = this.props;
+    const { items, link, textLogo, onLink} = this.props;
     const navItems = items.map(item => {
-      return <NavItem text={item} onClick={onClick}/>
+      return <NavItem
+        link={link}
+        text={item}
+        onLink={()=>onLink(item)}
+      />
     }); 
 
     return (

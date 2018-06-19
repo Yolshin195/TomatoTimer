@@ -2,8 +2,7 @@ import {
   ACTION_TICK_TIMER,
   ACTION_START_TIMER,
   ACTION_NEXT_TIMER,
-  ACTION_PAUSE_TIMER,
-  ACTION_SHOW_SETTINGS
+  ACTION_PAUSE_TIMER
 } from './tomatoTimer.actions.js';
 
 const initialState = {
@@ -15,11 +14,6 @@ const initialState = {
   durationWork: 1800,
   durationSmallBreak: 300,
   durationBigBreak: 1500,
-  
-  showSetting: false,
-
-  navbarItems: 'ToDo,Settings',
-  navbarTextLogo: 'Tomato Timer'
 };
 
 const tomatoTimerReducer = (state = initialState, action) => {
@@ -46,11 +40,6 @@ const tomatoTimerReducer = (state = initialState, action) => {
       return {
         ...state,
         timerWork: false 
-      }
-    case ACTION_SHOW_SETTINGS:
-      return {
-        ...state,
-        showSetting: action.payload,
       }
   }
   return state;

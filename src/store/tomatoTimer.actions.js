@@ -7,7 +7,6 @@ export const ACTION_START_TIMER = 'ACTION_START_TIMER';
 export const ACTION_STOP_TIMER = 'ACTION_STOP_TIMER';
 export const ACTION_NEXT_TIMER = 'ACTION_NEXT_TIMER';
 export const ACTION_PAUSE_TIMER = 'ACTION_PAUSE_TIMER';
-export const ACTION_SHOW_SETTINGS = 'ACTION_SHOW_SETTINGS';
 
 export const actionStopTimer = function() {
   return {
@@ -45,13 +44,5 @@ export const tickTimer = function(t) {
   return {
     type: ACTION_TICK_TIMER,
     payload: {minutes: min, seconds: sec} 
-  }
-}
-
-export const actionShowSettings = function(show) {
-  console.log('actionShowSettings: ', show);
-  return {
-    type: ACTION_SHOW_SETTINGS,
-    payload: show
   }
 }
